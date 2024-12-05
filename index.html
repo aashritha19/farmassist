@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Climate Adaptation App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>FarmAssist</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#alerts">Alerts</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#assistance">Assistance</a></li>
+                <li><a href="#login">Login/Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Sections -->
+    <section id="home" class="section active">
+        <h2>Welcome to FarmAssist</h2>
+        <p>Your platform to adapt to climate change, protect crops, and increase income.</p>
+        <div class="home-content">
+            <h3>Features of FarmAssist:</h3>
+            <ul>
+                <li>Climate-resilient crop suggestions</li>
+                <li>Knowledge sharing with experts and farmers</li>
+                <li>Updates on new agricultural techniques</li>
+            </ul>
+
+        </div>
+        <div class="how-it-works">
+            <h2>How It Works</h2>
+            <ol>
+                <li><strong>Weather Alerts:</strong> Receive timely weather updates to plan and protect your crops.</li>
+                <li><strong>Educational Resources:</strong> Learn about sustainable farming practices and climate-resilient crops.</li>
+                <li><strong>Expert Assistance:</strong> Connect with agricultural experts and researchers for tailored guidance.</li>
+                <li><strong>Market Insights:</strong> Access local and global market trends to make informed selling decisions.</li>
+                <li><strong>Personal Dashboard:</strong> Track your crop details, expected yields, and profits.</li>
+            </ol>
+        </div>
+    
+        <div class="contact">
+            <h2>Contact Us</h2>
+            <p>If you have any questions, feel free to reach out:</p>
+            <ul>
+                <li>Email: <a href="mailto:support@agriadapt.com">support@agriadapt.com</a></li>
+                <li>Phone: +1 234 567 8900</li>
+                <li>Address: 123 Farming Lane, Agro City, Country</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="alerts" class="section">
+        <h2>Weather Alerts</h2>
+        <p>Receive real-time weather alerts to protect your crops. Stay updated on forecasts and extreme conditions.</p>
+        <div id="alerts-page">
+            
+            <div id="alerts-list">
+                <!-- Weather data will be populated here by JavaScript -->
+                <p>Loading weather data...</p>
+            <!-- Real-time weather data will be displayed here -->
+        </div>
+    </section>
+
+
+    <section id="education" class="section">
+        <h2>Educational Resources</h2>
+        <p>Learn about climate-resilient practices, crop management, and improved techniques to boost yields.</p>
+        <div class="education-content">
+            <p>Explore articles, videos, and guides tailored to your needs.</p>
+            <a href="https://www.researchgate.net/publication/360265780_Enhancing_Climate_Change_Education_through_Links_to_Agriculture">Climate-Resilient farming</a>
+            
+            <div id="educational-resources"></div>
+        </div>
+    </section>
+
+    <section id="assistance" class="section">
+        <h2>Connect with Experts</h2>
+        <p>Get in touch with agricultural experts and fellow farmers.</p>
+        <div id="assistance-content">
+            <button onclick="connectWithExperts()">Contact Experts</button>
+            <!-- Email or messaging UI will appear here -->
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <h2>Farmer Dashboard</h2>
+        <p>Track your crops, monitor profits, and stay updated on your farm's health.</p>
+        <form id="dashboard-form">
+            <label for="crop-type">Crop Type:</label>
+            <input type="text" id="crop-type" name="crop-type" required>
+
+            <label for="crop-area">Area (in acres):</label>
+            <input type="number" id="crop-area" name="crop-area" required>
+
+            <label for="expected-profit">Expected Profit (per acre):</label>
+            <input type="number" id="expected-profit" name="expected-profit" required>
+
+            <button type="button" onclick="updateDashboard()">Update Dashboard</button>
+        </form>
+        <div id="dashboard-summary">
+            <!-- Dashboard summary and profit calculations will be displayed here -->
+        </div>
+    </section>
+
+    <!-- Login/Register Section -->
+    <section id="login" class="section">
+        <h2>Login/Register</h2>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+            <p>New here? <a href="#register">Register</a></p>
+        </form>
+
+        <form id="register-form" style="display: none;">
+            <label for="new-username">Username:</label>
+            <input type="text" id="new-username" name="new-username" required>
+
+            <label for="new-password">Password:</label>
+            <input type="password" id="new-password" name="new-password" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="submit">Register</button>
+            <p>Already have an account? <a href="#login" id="back-to-login">Login</a></p>
+        </form>
+    </section>
+
+    <!-- Inline JavaScript for Navigation -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll("nav ul.nav-links li a");
+            // Get all sections
+            const sections = document.querySelectorAll(".section");
+
+            // Function to hide all sections
+            function hideAllSections() {
+                sections.forEach(section => {
+                    section.style.display = "none";
+                });
+            }
+
+            // Function to show the clicked section
+            function showSection(id) {
+                document.getElementById(id).style.display = "block";
+            }
+
+            // Set up click event listeners for each nav link
+            navLinks.forEach(link => {
+                link.addEventListener("click", function(event) {
+                    event.preventDefault();  // Prevent default anchor behavior
+
+                    // Hide all sections
+                    hideAllSections();
+
+                    // Get the target section ID from the link's href attribute (remove the #)
+                    const targetId = link.getAttribute("href").substring(1);
+
+                    // Show the target section
+                    showSection(targetId);
+                });
+            });
+
+            // Show the home section by default on page load
+            hideAllSections();
+            showSection("home");
+        });
+        async function fetchWeatherData(city = "Hyderabad") {
+            const apiKey = "43fbd1b958cb488da3183530241011"; // Replace with your WeatherAPI key
+            const apiUrl = 'https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=Hyderabad&aqi=no';
+            
+        
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error("Failed to fetch weather data.");
+        
+                const data = await response.json();
+                displayWeatherData(data);
+            } catch (error) {
+                console.error("Error fetching weather data:", error);
+            }
+        }
+        
+        // Function to display weather data in the alerts section
+        function displayWeatherData(data) {
+            const alertsDiv = document.getElementById("alerts-list");
+            alertsDiv.innerHTML = `
+                <h3>Weather for ${data.location.name}</h3>
+                <p><strong>Temperature:</strong> ${data.current.temp_c}°C</p>
+                <p><strong>Condition:</strong> ${data.current.condition.text}</p>
+                <p><strong>Humidity:</strong> ${data.current.humidity}%</p>
+                <p><strong>Wind Speed:</strong> ${data.current.wind_kph} kph</p>
+                <img src="${data.current.condition.icon}" alt="Weather icon">
+            `;
+        }
+        
+        // Call the function to load weather data when the page loads
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchWeatherData();
+        });
+    </script>
+</body>
+</html>
